@@ -1,4 +1,4 @@
-package com.ajailani.resepmakanan.ui.theme
+package com.ajailani.resepy.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

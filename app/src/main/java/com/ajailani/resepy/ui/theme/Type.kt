@@ -1,4 +1,4 @@
-package com.ajailani.resepmakanan.ui.theme
+package com.ajailani.resepy.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

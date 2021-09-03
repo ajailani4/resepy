@@ -1,4 +1,4 @@
-package com.ajailani.resepmakanan
+package com.ajailani.resepy
 
 import org.junit.Test
 
