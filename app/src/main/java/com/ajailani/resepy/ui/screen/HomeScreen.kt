@@ -1,5 +1,6 @@
 package com.ajailani.resepy.ui.screen
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -7,10 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,6 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ajailani.resepy.data.model.Recipe
+import com.ajailani.resepy.data.model.response.RecipeResponse
 import com.ajailani.resepy.ui.component.CategoryCard
 import com.ajailani.resepy.ui.component.NewRecipeCard
 import com.ajailani.resepy.ui.component.SectionTitle
@@ -27,6 +27,7 @@ import com.ajailani.resepy.ui.component.fontFamily
 import com.ajailani.resepy.ui.theme.BackgroundGray
 import com.ajailani.resepy.ui.theme.DarkGray
 import com.ajailani.resepy.ui.theme.Primary
+import com.ajailani.resepy.ui.viewstate.NewRecipesState
 import com.ajailani.resepy.util.generateCategories
 import com.ajailani.resepy.util.generateRecipes
 import compose.icons.EvaIcons
@@ -34,14 +35,16 @@ import compose.icons.evaicons.Fill
 import compose.icons.evaicons.fill.Search
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    newRecipesState: NewRecipesState
+) {
     Column(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState())
     ) {
         Header()
         SearchTextField()
-        NewRecipesSection()
+        NewRecipesSection(newRecipesState)
         CategorySection()
     }
 }
@@ -117,23 +120,42 @@ fun SearchTextField() {
 }
 
 @Composable
-fun NewRecipesSection() {
-    val dummyNewRecipes = generateRecipes()
-
+fun NewRecipesSection(
+    newRecipesState: NewRecipesState
+) {
     Column(modifier = Modifier.padding(bottom = 25.dp)) {
         SectionTitle(
             title = "New Recipes",
             isViewAllEnabled = true,
             modifier = Modifier.padding(horizontal = 20.dp)
         )
-        LazyRow(contentPadding = PaddingValues(horizontal = 20.dp)) {
-            items(dummyNewRecipes) { recipe ->
-                NewRecipeCard(recipe)
-                Spacer(modifier = Modifier.width(17.dp))
 
-                /*if (recipe != dummyNewRecipes.last()) {
-                    Spacer(modifier = Modifier.width(17.dp))
-                }*/
+        when (newRecipesState) {
+            is NewRecipesState.Loading -> {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
+
+            is NewRecipesState.Success -> {
+                val recipes = newRecipesState.recipes
+
+                LazyRow(contentPadding = PaddingValues(horizontal = 20.dp)) {
+                    items(recipes!!) { recipe ->
+                        NewRecipeCard(recipe)
+
+                        if (recipe != recipes.last()) {
+                            Spacer(modifier = Modifier.width(17.dp))
+                        }
+                    }
+                }
+            }
+
+            is NewRecipesState.Error -> {
+                Log.e("GetNewRecipes", newRecipesState.message!!)
             }
         }
     }
@@ -154,10 +176,4 @@ fun CategorySection() {
             }*/
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewHomeScreen() {
-    HomeScreen()
 }

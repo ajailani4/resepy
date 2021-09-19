@@ -1,4 +1,4 @@
-package com.ajailani.resepy.data.model
+package com.ajailani.resepy.data.model.response
 
 data class BaseResponse<T>(
     val method: String,

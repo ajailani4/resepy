@@ -9,7 +9,7 @@ android {
     compileSdk 30
 
     defaultConfig {
-        applicationId "com.ajailani.resepmakanan"
+        applicationId "com.ajailani.resepy"
         minSdk 21
         targetSdk 30
         versionCode 1
