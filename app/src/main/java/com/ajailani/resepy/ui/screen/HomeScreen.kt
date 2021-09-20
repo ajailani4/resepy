@@ -21,7 +21,7 @@ import com.ajailani.resepy.ui.component.NewRecipeCard
 import com.ajailani.resepy.ui.component.SectionTitle
 import com.ajailani.resepy.ui.component.fontFamily
 import com.ajailani.resepy.ui.state.CategoriesState
-import com.ajailani.resepy.ui.theme.BackgroundGray
+import com.ajailani.resepy.ui.theme.SearchBackground
 import com.ajailani.resepy.ui.theme.DarkGray
 import com.ajailani.resepy.ui.theme.Primary
 import com.ajailani.resepy.ui.state.NewRecipesState
@@ -93,7 +93,7 @@ fun SearchTextField() {
             },
             singleLine = true,
             colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = BackgroundGray,
+                backgroundColor = SearchBackground,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
             ),
