@@ -43,6 +43,7 @@ fun App(content: @Composable () -> Unit) {
 fun Content(homeViewModel: HomeViewModel) {
     Navigation(
         navController = rememberNavController(),
-        newRecipesState = homeViewModel.newRecipesState
+        newRecipesState = homeViewModel.newRecipesState,
+        categoriesState = homeViewModel.categoriesState
     )
 }

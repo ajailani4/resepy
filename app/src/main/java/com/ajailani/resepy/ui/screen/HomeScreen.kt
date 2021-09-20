@@ -2,7 +2,6 @@ package com.ajailani.resepy.ui.screen
 
 import android.util.Log
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -15,28 +14,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ajailani.resepy.data.model.Recipe
-import com.ajailani.resepy.data.model.response.RecipeResponse
 import com.ajailani.resepy.ui.component.CategoryCard
 import com.ajailani.resepy.ui.component.NewRecipeCard
 import com.ajailani.resepy.ui.component.SectionTitle
 import com.ajailani.resepy.ui.component.fontFamily
+import com.ajailani.resepy.ui.state.CategoriesState
 import com.ajailani.resepy.ui.theme.BackgroundGray
 import com.ajailani.resepy.ui.theme.DarkGray
 import com.ajailani.resepy.ui.theme.Primary
-import com.ajailani.resepy.ui.viewstate.NewRecipesState
-import com.ajailani.resepy.util.generateCategories
-import com.ajailani.resepy.util.generateRecipes
+import com.ajailani.resepy.ui.state.NewRecipesState
 import compose.icons.EvaIcons
 import compose.icons.evaicons.Fill
 import compose.icons.evaicons.fill.Search
 
 @Composable
 fun HomeScreen(
-    newRecipesState: NewRecipesState
+    newRecipesState: NewRecipesState,
+    categoriesState: CategoriesState
 ) {
     Column(modifier = Modifier
         .fillMaxSize()
@@ -45,7 +41,7 @@ fun HomeScreen(
         Header()
         SearchTextField()
         NewRecipesSection(newRecipesState)
-        CategorySection()
+        CategorySection(categoriesState)
     }
 }
 
@@ -143,37 +139,63 @@ fun NewRecipesSection(
             is NewRecipesState.Success -> {
                 val recipes = newRecipesState.recipes
 
-                LazyRow(contentPadding = PaddingValues(horizontal = 20.dp)) {
-                    items(recipes!!) { recipe ->
-                        NewRecipeCard(recipe)
+                if (recipes != null) {
+                    LazyRow(contentPadding = PaddingValues(horizontal = 20.dp)) {
+                        items(recipes) { recipe ->
+                            NewRecipeCard(recipe)
 
-                        if (recipe != recipes.last()) {
-                            Spacer(modifier = Modifier.width(17.dp))
+                            if (recipe != recipes.last()) {
+                                Spacer(modifier = Modifier.width(17.dp))
+                            }
                         }
                     }
                 }
             }
 
             is NewRecipesState.Error -> {
-                Log.e("GetNewRecipes", newRecipesState.message!!)
+                Log.e("GetNewRecipes", newRecipesState.errorMessage!!)
             }
         }
     }
 }
 
 @Composable
-fun CategorySection() {
-    val dummyCategories = generateCategories()
-    
-    Column(modifier = Modifier.padding(horizontal = 20.dp)) {
+fun CategorySection(
+    categoriesState: CategoriesState
+) {
+    Column(modifier = Modifier
+        .padding(horizontal = 20.dp)
+        .padding(bottom = 20.dp)
+    ) {
         SectionTitle(title = "Category")
-        for (category in dummyCategories) {
-            CategoryCard(category)
-            Spacer(modifier = Modifier.height(17.dp))
 
-            /*if (category != dummyCategories.last()) {
-                Spacer(modifier = Modifier.width(20.dp))
-            }*/
+        when (categoriesState) {
+            is CategoriesState.Loading -> {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
+
+            is CategoriesState.Success -> {
+                val categories = categoriesState.categories
+
+                if (categories != null) {
+                    for (category in categories) {
+                        CategoryCard(category)
+
+                        if (category != categories.last()) {
+                            Spacer(modifier = Modifier.height(20.dp))
+                        }
+                    }
+                }
+            }
+
+            is CategoriesState.Error -> {
+                Log.e("GetCategories", categoriesState.errorMessage!!)
+            }
         }
     }
 }

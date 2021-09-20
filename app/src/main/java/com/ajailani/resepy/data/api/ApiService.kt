@@ -19,5 +19,5 @@ interface ApiService {
     ): Response<BaseResponse<List<Category>>>
 
     @GET("categorys/recipes")
-    suspend fun getCategories(): Response<BaseResponse<Category>>
+    suspend fun getCategories(): Response<BaseResponse<List<Category>>>
 }
