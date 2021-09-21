@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.ajailani.resepy.data.model.Category
 import com.ajailani.resepy.ui.theme.CategoryCardBg
 import com.ajailani.resepy.ui.theme.CategoryText
+import com.ajailani.resepy.ui.theme.poppinsFontFamily
 import com.ajailani.resepy.util.categoryThumbGenerator
 import com.ajailani.resepy.util.generateCategory
 
@@ -46,7 +47,7 @@ fun CategoryCard(category: Category) {
                 text = category.category,
                 color = CategoryText,
                 fontSize = 16.sp,
-                fontFamily = fontFamily,
+                fontFamily = poppinsFontFamily,
                 fontWeight = FontWeight.Medium
             )
         }

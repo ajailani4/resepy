@@ -4,10 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.ajailani.resepy.ui.screen.DetailScreen
 import com.ajailani.resepy.ui.screen.HomeScreen
 import com.ajailani.resepy.ui.screen.Screen
 import com.ajailani.resepy.ui.state.CategoriesState
 import com.ajailani.resepy.ui.state.NewRecipesState
+import com.ajailani.resepy.util.generateRecipe
 
 @Composable
 fun Navigation(
@@ -21,6 +23,10 @@ fun Navigation(
                 newRecipesState = newRecipesState,
                 categoriesState = categoriesState
             )
+        }
+
+        composable(route = Screen.DetailScreen.route) {
+            DetailScreen(generateRecipe())
         }
     }
 }

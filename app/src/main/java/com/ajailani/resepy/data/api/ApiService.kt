@@ -2,6 +2,7 @@ package com.ajailani.resepy.data.api
 
 import com.ajailani.resepy.data.model.response.BaseResponse
 import com.ajailani.resepy.data.model.Category
+import com.ajailani.resepy.data.model.Recipe
 import com.ajailani.resepy.data.model.response.RecipeResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,10 +14,15 @@ interface ApiService {
         @Query("limit") limit: Int
     ): Response<BaseResponse<List<RecipeResponse>>>
 
-    @GET("recipes/{slug}")
+    @GET("recipes/{key}")
     suspend fun getRecipesByCategory(
-        slug: String
+        key: String
     ): Response<BaseResponse<List<Category>>>
+
+    @GET("recipes/{key}")
+    suspend fun getRecipeDetail(
+        key: String
+    ): Response<BaseResponse<Recipe>>
 
     @GET("categorys/recipes")
     suspend fun getCategories(): Response<BaseResponse<List<Category>>>

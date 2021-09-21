@@ -16,10 +16,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.annotation.ExperimentalCoilApi
 import com.ajailani.resepy.ui.component.CategoryCard
 import com.ajailani.resepy.ui.component.NewRecipeCard
-import com.ajailani.resepy.ui.component.SectionTitle
-import com.ajailani.resepy.ui.component.fontFamily
+import com.ajailani.resepy.ui.component.TitleSection
+import com.ajailani.resepy.ui.theme.poppinsFontFamily
 import com.ajailani.resepy.ui.state.CategoriesState
 import com.ajailani.resepy.ui.theme.SearchBackground
 import com.ajailani.resepy.ui.theme.DarkGray
@@ -38,7 +39,7 @@ fun HomeScreen(
         .fillMaxSize()
         .verticalScroll(rememberScrollState())
     ) {
-        Header()
+        HomeHeader()
         SearchTextField()
         NewRecipesSection(newRecipesState)
         CategorySection(categoriesState)
@@ -46,22 +47,22 @@ fun HomeScreen(
 }
 
 @Composable
-fun Header() {
+fun HomeHeader() {
     Column(modifier = Modifier
         .padding(20.dp)
     ) {
         Text(
-            text = "Hello",
+            text = "Halo",
             color = Primary,
-            fontFamily = fontFamily,
+            fontFamily = poppinsFontFamily,
             fontSize = 20.sp,
             fontWeight = FontWeight.Medium
         )
 
         Text(
-            text = "What you want to cook today?",
+            text = "Mau masak apa hari ini?",
             color = Color.Gray,
-            fontFamily = fontFamily,
+            fontFamily = poppinsFontFamily,
             fontSize = 15.sp,
             fontWeight = FontWeight.Normal
         )
@@ -99,14 +100,14 @@ fun SearchTextField() {
             ),
             textStyle = TextStyle(
                 color = Color.Black,
-                fontFamily = fontFamily,
+                fontFamily = poppinsFontFamily,
                 fontWeight = FontWeight.Normal
             ),
             placeholder = {
                 Text(
-                    text = "Search Recipes",
+                    text = "Cari Resep",
                     color = DarkGray,
-                    fontFamily = fontFamily,
+                    fontFamily = poppinsFontFamily,
                     fontWeight = FontWeight.Normal
                 )
             },
@@ -115,13 +116,14 @@ fun SearchTextField() {
     }
 }
 
+@ExperimentalCoilApi
 @Composable
 fun NewRecipesSection(
     newRecipesState: NewRecipesState
 ) {
     Column(modifier = Modifier.padding(bottom = 25.dp)) {
-        SectionTitle(
-            title = "New Recipes",
+        TitleSection(
+            title = "Resep Terbaru",
             isViewAllEnabled = true,
             modifier = Modifier.padding(horizontal = 20.dp)
         )
@@ -167,7 +169,7 @@ fun CategorySection(
         .padding(horizontal = 20.dp)
         .padding(bottom = 20.dp)
     ) {
-        SectionTitle(title = "Category")
+        TitleSection(title = "Kategori")
 
         when (categoriesState) {
             is CategoriesState.Loading -> {

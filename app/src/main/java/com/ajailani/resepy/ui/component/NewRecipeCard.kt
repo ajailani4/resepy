@@ -11,18 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
-import com.ajailani.resepy.R
-import com.ajailani.resepy.data.model.Recipe
 import com.ajailani.resepy.data.model.response.RecipeResponse
 import com.ajailani.resepy.ui.theme.BlackGray
-import com.ajailani.resepy.util.generateRecipe
+import com.ajailani.resepy.ui.theme.poppinsFontFamily
+import com.ajailani.resepy.util.generateRecipeResponse
 
 @Composable
 fun NewRecipeCard(recipe: RecipeResponse) {
@@ -47,7 +45,7 @@ fun NewRecipeCard(recipe: RecipeResponse) {
                 DifficultySurface(recipe.difficulty)
                 ShortInfoSurface(
                     title = recipe.title,
-                    time = recipe.times,
+                    times = recipe.times,
                     servings = recipe.servings
                 )
             }
@@ -69,7 +67,7 @@ fun DifficultySurface(level: String) {
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             color = Color.White,
-            fontFamily = fontFamily,
+            fontFamily = poppinsFontFamily,
             fontSize = 12.sp,
             fontWeight = FontWeight.Medium,
             modifier = Modifier.padding(vertical = 2.dp, horizontal = 10.dp)
@@ -80,7 +78,7 @@ fun DifficultySurface(level: String) {
 @Composable
 fun ShortInfoSurface(
     title: String,
-    time: String,
+    times: String,
     servings: String
 ) {
     Surface(
@@ -97,16 +95,15 @@ fun ShortInfoSurface(
                 overflow = TextOverflow.Ellipsis,
                 color = Color.White,
                 fontSize = 16.sp,
-                fontFamily = fontFamily,
+                fontFamily = poppinsFontFamily,
                 fontWeight = FontWeight.Medium
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "$time | $servings",
+                text = "$times | $servings",
                 color = Color.Gray,
                 fontSize = 14.sp,
-                fontFamily = fontFamily,
-                fontWeight = FontWeight.Normal
+                fontFamily = poppinsFontFamily
             )
         }
     }
@@ -119,6 +116,6 @@ fun PreviewNewRecipeCard() {
         .fillMaxSize()
         .padding(20.dp)
     ) {
-        NewRecipeCard(generateRecipe())
+        NewRecipeCard(generateRecipeResponse())
     }
 }

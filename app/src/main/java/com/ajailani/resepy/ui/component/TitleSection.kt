@@ -10,12 +10,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ajailani.resepy.ui.theme.BlackGray
+import com.ajailani.resepy.ui.theme.DarkGray
+import com.ajailani.resepy.ui.theme.Primary
+import com.ajailani.resepy.ui.theme.poppinsFontFamily
 
 @Composable
-fun SectionTitle(
+fun TitleSection(
+    modifier: Modifier = Modifier,
     title: String,
-    isViewAllEnabled: Boolean = false,
-    modifier: Modifier = Modifier
+    info: String? = null,
+    isViewAllEnabled: Boolean = false
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -23,17 +28,27 @@ fun SectionTitle(
     ) {
         Text(
             text = title,
-            fontFamily = fontFamily,
+            fontFamily = poppinsFontFamily,
             fontSize = 18.sp,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.weight(1f)
         )
 
+        if (info != null) {
+            Text(
+                text = info,
+                color = Primary,
+                fontFamily = poppinsFontFamily,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium
+            )
+        }
+
         if (isViewAllEnabled) {
             Text(
                 text = "View All",
                 color = Color.Gray,
-                fontFamily = fontFamily,
+                fontFamily = poppinsFontFamily,
                 fontSize = 14.sp
             )
         }
