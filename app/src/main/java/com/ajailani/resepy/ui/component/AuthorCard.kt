@@ -28,20 +28,20 @@ fun AuthorCard(author: Author) {
             Text(
                 text = "Resep oleh:",
                 color = Color.Gray,
-                fontSize = 12.sp,
+                fontSize = 13.sp,
                 fontFamily = poppinsFontFamily
             )
             Text(
                 text = author.user,
                 color = Color.White,
-                fontSize = 14.sp,
+                fontSize = 15.sp,
                 fontFamily = poppinsFontFamily
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = author.datePublished,
                 color = DarkGray,
-                fontSize = 13.sp,
+                fontSize = 14.sp,
                 fontFamily = poppinsFontFamily
             )
         }

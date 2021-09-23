@@ -14,17 +14,16 @@ import com.ajailani.resepy.ui.event.HomeEvent
 import com.ajailani.resepy.ui.screen.HomeScreen
 import com.ajailani.resepy.ui.theme.ResepMakananTheme
 import com.ajailani.resepy.ui.viewmodel.HomeViewModel
+import com.ajailani.resepy.ui.viewmodel.RecipeDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val homeViewModel: HomeViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             App {
-                Content(homeViewModel)
+                Content()
             }
         }
     }
@@ -40,10 +39,6 @@ fun App(content: @Composable () -> Unit) {
 }
 
 @Composable
-fun Content(homeViewModel: HomeViewModel) {
-    Navigation(
-        navController = rememberNavController(),
-        newRecipesState = homeViewModel.newRecipesState,
-        categoriesState = homeViewModel.categoriesState
-    )
+fun Content() {
+    Navigation(rememberNavController())
 }

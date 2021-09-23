@@ -5,7 +5,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -18,13 +17,13 @@ fun IngredientItem(ingredient: String) {
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 10.dp)
+            .padding(bottom = 15.dp)
     ) {
         var quantity = ingredient.split(" ")[0]
         val type: String
         var item: String
 
-        if (quantity.toIntOrNull() != null) {
+        if (quantity.toIntOrNull() != null || quantity.toFloatOrNull() != null) {
             type = ingredient.split(" ")[1]
             item = ingredient.substringAfter(type)
             item = item[1].uppercase() + item.substring(2)
@@ -38,7 +37,8 @@ fun IngredientItem(ingredient: String) {
             text = item,
             color = Color.Black,
             fontSize = 14.sp,
-            fontFamily = poppinsFontFamily
+            fontFamily = poppinsFontFamily,
+            modifier = Modifier.widthIn(max = 260.dp)
         )
 
         if (quantity.isNotEmpty()) {
@@ -54,11 +54,11 @@ fun IngredientItem(ingredient: String) {
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewIngredientCard() {
+fun PreviewIngredientItem() {
     Box(modifier = Modifier
         .fillMaxWidth()
         .padding(vertical = 15.dp, horizontal = 20.dp)
     ) {
-        IngredientItem(generateRecipe().ingredients[2])
+        StepItem(generateRecipe().ingredients[2])
     }
 }

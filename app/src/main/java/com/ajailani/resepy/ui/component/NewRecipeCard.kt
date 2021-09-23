@@ -1,6 +1,7 @@
 package com.ajailani.resepy.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,18 +17,27 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.ajailani.resepy.data.model.response.RecipeResponse
+import com.ajailani.resepy.ui.screen.Screen
 import com.ajailani.resepy.ui.theme.BlackGray
 import com.ajailani.resepy.ui.theme.poppinsFontFamily
 import com.ajailani.resepy.util.generateRecipeResponse
 
 @Composable
-fun NewRecipeCard(recipe: RecipeResponse) {
+fun NewRecipeCard(
+    recipe: RecipeResponse,
+    onClick: () -> Unit
+) {
     Card(
         shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.size(210.dp, 300.dp),
-        elevation = 0.dp
+        elevation = 0.dp,
+        modifier = Modifier
+            .size(210.dp, 300.dp)
+            .clickable {
+                onClick()
+            }
     ) {
         Box {
             Image(
@@ -116,6 +126,9 @@ fun PreviewNewRecipeCard() {
         .fillMaxSize()
         .padding(20.dp)
     ) {
-        NewRecipeCard(generateRecipeResponse())
+        NewRecipeCard(
+            recipe = generateRecipeResponse(),
+            onClick = {}
+        )
     }
 }

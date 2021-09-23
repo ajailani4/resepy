@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ajailani.resepy.data.model.response.RecipeResponse
 import com.ajailani.resepy.data.repository.MainRepository
 import com.ajailani.resepy.ui.event.HomeEvent
 import com.ajailani.resepy.ui.state.CategoriesState
@@ -27,7 +28,7 @@ class HomeViewModel @Inject constructor(
         handleEvent(HomeEvent.GetCategories)
     }
 
-    fun handleEvent(homeEvent: HomeEvent) {
+    private fun handleEvent(homeEvent: HomeEvent) {
         try {
             when (homeEvent) {
                 is HomeEvent.GetNewRecipes -> getNewRecipes()

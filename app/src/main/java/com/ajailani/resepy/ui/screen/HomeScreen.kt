@@ -16,6 +16,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import com.ajailani.resepy.ui.component.CategoryCard
 import com.ajailani.resepy.ui.component.NewRecipeCard
@@ -26,22 +29,29 @@ import com.ajailani.resepy.ui.theme.SearchBackground
 import com.ajailani.resepy.ui.theme.DarkGray
 import com.ajailani.resepy.ui.theme.Primary
 import com.ajailani.resepy.ui.state.NewRecipesState
+import com.ajailani.resepy.ui.viewmodel.HomeViewModel
 import compose.icons.EvaIcons
 import compose.icons.evaicons.Fill
 import compose.icons.evaicons.fill.Search
 
 @Composable
 fun HomeScreen(
-    newRecipesState: NewRecipesState,
-    categoriesState: CategoriesState
+    navController: NavController,
+    homeViewModel: HomeViewModel = hiltViewModel()
 ) {
+    val newRecipesState = homeViewModel.newRecipesState
+    val categoriesState = homeViewModel.categoriesState
+
     Column(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState())
     ) {
         HomeHeader()
         SearchTextField()
-        NewRecipesSection(newRecipesState)
+        NewRecipesSection(
+            navController = navController,
+            newRecipesState = newRecipesState
+        )
         CategorySection(categoriesState)
     }
 }
@@ -119,6 +129,7 @@ fun SearchTextField() {
 @ExperimentalCoilApi
 @Composable
 fun NewRecipesSection(
+    navController: NavController,
     newRecipesState: NewRecipesState
 ) {
     Column(modifier = Modifier.padding(bottom = 25.dp)) {
@@ -144,7 +155,14 @@ fun NewRecipesSection(
                 if (recipes != null) {
                     LazyRow(contentPadding = PaddingValues(horizontal = 20.dp)) {
                         items(recipes) { recipe ->
-                            NewRecipeCard(recipe)
+                            NewRecipeCard(
+                                recipe = recipe,
+                                onClick = {
+                                    navController.navigate(
+                                        Screen.RecipeDetailScreen.route + "?key=${recipe.key}"
+                                    )
+                                }
+                            )
 
                             if (recipe != recipes.last()) {
                                 Spacer(modifier = Modifier.width(17.dp))
