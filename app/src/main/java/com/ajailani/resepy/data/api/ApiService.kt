@@ -20,6 +20,11 @@ interface ApiService {
         @Path("key") key: String
     ): Response<BaseResponse<Recipe>>
 
+    @GET("recipes/{page}")
+    suspend fun getPaginatedNewRecipes(
+        @Path("page") page: Int
+    ): Response<BaseResponse<List<RecipeResponse>>>
+
     @GET("categorys/recipes")
     suspend fun getCategories(): Response<BaseResponse<List<Category>>>
 

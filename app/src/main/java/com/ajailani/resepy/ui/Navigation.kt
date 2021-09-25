@@ -36,7 +36,7 @@ fun Navigation(
         }
 
         composable(route = Screen.NewRecipesScreen.route) {
-            NewRecipesScreen()
+            NewRecipesScreen(navController)
         }
     }
 }

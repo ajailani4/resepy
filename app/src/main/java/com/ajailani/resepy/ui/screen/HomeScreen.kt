@@ -136,7 +136,10 @@ fun NewRecipesSection(
         TitleSection(
             title = "Resep Terbaru",
             isViewAllEnabled = true,
-            modifier = Modifier.padding(horizontal = 20.dp)
+            modifier = Modifier.padding(horizontal = 20.dp),
+            onClickViewAll = {
+                navController.navigate(Screen.NewRecipesScreen.route)
+            }
         )
 
         when (newRecipesState) {

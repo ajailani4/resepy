@@ -1,5 +1,6 @@
 package com.ajailani.resepy.ui.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
@@ -20,7 +21,8 @@ fun TitleSection(
     modifier: Modifier = Modifier,
     title: String,
     info: String? = null,
-    isViewAllEnabled: Boolean = false
+    isViewAllEnabled: Boolean = false,
+    onClickViewAll: (() -> Unit)? = null
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -49,7 +51,12 @@ fun TitleSection(
                 text = "View All",
                 color = Color.Gray,
                 fontFamily = poppinsFontFamily,
-                fontSize = 14.sp
+                fontSize = 14.sp,
+                modifier = Modifier.clickable {
+                    if (onClickViewAll != null) {
+                        onClickViewAll()
+                    }
+                }
             )
         }
     }

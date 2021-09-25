@@ -1,6 +1,7 @@
 package com.ajailani.resepy.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
@@ -25,11 +26,16 @@ import com.ajailani.resepy.util.categoryThumbGenerator
 import com.ajailani.resepy.util.generateRecipeResponse
 
 @Composable
-fun RecipeCard(recipeResponse: RecipeResponse) {
+fun RecipeCard(
+    recipeResponse: RecipeResponse?,
+    onClick: () -> Unit
+) {
     Surface(
         shape = RoundedCornerShape(15.dp),
         color = Color.White,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
     ) {
         Row(modifier = Modifier
             .fillMaxWidth()
@@ -37,26 +43,28 @@ fun RecipeCard(recipeResponse: RecipeResponse) {
         ) {
             Surface(shape = RoundedCornerShape(10.dp)) {
                 Image(
-                    painter = /*rememberImagePainter(recipeResponse.thumb)*/painterResource(id = categoryThumbGenerator("dessert")),
-                    contentDescription = recipeResponse.title,
+                    painter = rememberImagePainter(recipeResponse?.thumb),
+                    contentDescription = recipeResponse?.title,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.size(85.dp)
                 )
             }
             Spacer(modifier = Modifier.width(20.dp))
             Column {
-                Text(
-                    text = recipeResponse.title,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                    color = CategoryText,
-                    fontSize = 16.sp,
-                    fontFamily = poppinsFontFamily,
-                    fontWeight = FontWeight.Medium
-                )
+                if (recipeResponse != null) {
+                    Text(
+                        text = recipeResponse.title,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        color = Color.Black,
+                        fontSize = 16.sp,
+                        fontFamily = poppinsFontFamily,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
-                    text = "${recipeResponse.times} | ${recipeResponse.servings}",
+                    text = "${recipeResponse?.times} | ${recipeResponse?.servings}",
                     color = Color.Gray,
                     fontSize = 14.sp,
                     fontFamily = poppinsFontFamily,
@@ -77,6 +85,9 @@ fun PreviewRecipeCard() {
         .fillMaxSize()
         .padding(20.dp)
     ) {
-        RecipeCard(generateRecipeResponse())
+        RecipeCard(
+            recipeResponse = generateRecipeResponse(),
+            onClick = {}
+        )
     }
 }

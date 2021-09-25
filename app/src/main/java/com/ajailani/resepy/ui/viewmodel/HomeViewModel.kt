@@ -42,7 +42,9 @@ class HomeViewModel @Inject constructor(
     private fun getNewRecipes() {
         viewModelScope.launch {
             newRecipesState = try {
-                NewRecipesState.Success(mainRepository.getNewRecipes(5)?.results)
+                NewRecipesState.Success(
+                    mainRepository.getNewRecipes(5).body()?.results
+                )
             } catch (e: Exception) {
                 NewRecipesState.Error(e.localizedMessage)
             }
@@ -52,7 +54,7 @@ class HomeViewModel @Inject constructor(
     private fun getCategories() {
         viewModelScope.launch {
             categoriesState = try {
-                CategoriesState.Success(mainRepository.getCategories()?.results)
+                CategoriesState.Success(mainRepository.getCategories().body()?.results)
             } catch (e: Exception) {
                 CategoriesState.Error(e.localizedMessage)
             }
