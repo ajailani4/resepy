@@ -52,7 +52,10 @@ fun HomeScreen(
             navController = navController,
             newRecipesState = newRecipesState
         )
-        CategorySection(categoriesState)
+        CategorySection(
+            navController = navController,
+            categoriesState = categoriesState
+        )
     }
 }
 
@@ -138,7 +141,9 @@ fun NewRecipesSection(
             isViewAllEnabled = true,
             modifier = Modifier.padding(horizontal = 20.dp),
             onClickViewAll = {
-                navController.navigate(Screen.NewRecipesScreen.route)
+                navController.navigate(
+                    Screen.RecipesListScreen.route + "?title=Resep Terbaru"
+                )
             }
         )
 
@@ -184,6 +189,7 @@ fun NewRecipesSection(
 
 @Composable
 fun CategorySection(
+    navController: NavController,
     categoriesState: CategoriesState
 ) {
     Column(modifier = Modifier
@@ -207,7 +213,18 @@ fun CategorySection(
 
                 if (categories != null) {
                     for (category in categories) {
-                        CategoryCard(category)
+                        if (category.key == "dessert") {
+                            category.key = "resep-dessert"
+                        }
+
+                        CategoryCard(
+                            category = category,
+                            onClick = {
+                                navController.navigate(
+                                    Screen.RecipesListScreen.route + "?title=${category.category}&key=${category.key}"
+                                )
+                            }
+                        )
 
                         if (category != categories.last()) {
                             Spacer(modifier = Modifier.height(20.dp))

@@ -8,12 +8,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.ajailani.resepy.ui.screen.RecipeDetailScreen
 import com.ajailani.resepy.ui.screen.HomeScreen
-import com.ajailani.resepy.ui.screen.NewRecipesScreen
+import com.ajailani.resepy.ui.screen.RecipesListScreen
 import com.ajailani.resepy.ui.screen.Screen
-import com.ajailani.resepy.ui.state.CategoriesState
-import com.ajailani.resepy.ui.state.NewRecipesState
-import com.ajailani.resepy.ui.state.RecipeState
-import com.ajailani.resepy.util.generateRecipe
 
 @Composable
 fun Navigation(
@@ -35,8 +31,19 @@ fun Navigation(
             RecipeDetailScreen(navController)
         }
 
-        composable(route = Screen.NewRecipesScreen.route) {
-            NewRecipesScreen(navController)
+        composable(
+            route = Screen.RecipesListScreen.route + "?title={title}&key={key}",
+            arguments = listOf(
+                navArgument("title") {
+                    type = NavType.StringType
+                },
+                navArgument("key") {
+                    type = NavType.StringType
+                    nullable = true
+                }
+            )
+        ) {
+            RecipesListScreen(navController)
         }
     }
 }

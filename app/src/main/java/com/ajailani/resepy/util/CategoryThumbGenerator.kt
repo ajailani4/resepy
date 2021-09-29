@@ -4,7 +4,7 @@ import com.ajailani.resepy.R
 
 fun categoryThumbGenerator(key: String) =
     when (key) {
-        "dessert" -> R.drawable.thumb_dessert
+        "resep-dessert" -> R.drawable.thumb_dessert
         "masakan-hari-raya" -> R.drawable.thumb_masakan_hari_raya
         "masakan-tradisional" -> R.drawable.thumb_masakan_tradisional
         "makan-malam" -> R.drawable.thumb_menu_makan_malam

@@ -1,6 +1,7 @@
 package com.ajailani.resepy.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
@@ -22,11 +23,16 @@ import com.ajailani.resepy.util.categoryThumbGenerator
 import com.ajailani.resepy.util.generateCategory
 
 @Composable
-fun CategoryCard(category: Category) {
+fun CategoryCard(
+    category: Category,
+    onClick: () -> Unit
+) {
     Surface(
         shape = RoundedCornerShape(15.dp),
         color = CategoryCardBg,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -61,6 +67,9 @@ fun PreviewCategoryCard() {
         .fillMaxSize()
         .padding(20.dp)
     ) {
-        CategoryCard(generateCategory())
+        CategoryCard(
+            category = generateCategory(),
+            onClick = {}
+        )
     }
 }

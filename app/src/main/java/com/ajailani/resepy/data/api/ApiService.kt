@@ -28,8 +28,9 @@ interface ApiService {
     @GET("categorys/recipes")
     suspend fun getCategories(): Response<BaseResponse<List<Category>>>
 
-    @GET("categorys/recipes/{key}")
+    @GET("categorys/recipes/{key}/{page}")
     suspend fun getRecipesByCategory(
-        @Path("key") key: String
-    ): Response<BaseResponse<List<Category>>>
+        @Path("key") key: String,
+        @Path("page") page: Int
+    ): Response<BaseResponse<List<RecipeResponse>>>
 }

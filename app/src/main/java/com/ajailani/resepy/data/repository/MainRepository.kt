@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.ajailani.resepy.data.api.ApiService
 import com.ajailani.resepy.data.data_source.NewRecipesSource
+import com.ajailani.resepy.data.data_source.RecipesByCategorySource
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
@@ -11,6 +12,7 @@ class MainRepository @Inject constructor(
 ) {
     suspend fun getNewRecipes(limit: Int) = apiService.getNewRecipes(limit)
     suspend fun getRecipeDetail(key: String) = apiService.getRecipeDetail(key)
+    suspend fun getCategories() = apiService.getCategories()
 
     fun getPaginatedNewRecipes() =
         Pager(
@@ -20,5 +22,11 @@ class MainRepository @Inject constructor(
             }
         ).flow
 
-    suspend fun getCategories() = apiService.getCategories()
+    fun getRecipesByCategory(key: String) =
+        Pager(
+            config = PagingConfig(enablePlaceholders = false, pageSize = 10),
+            pagingSourceFactory = {
+                RecipesByCategorySource(apiService, key)
+            }
+        ).flow
 }

@@ -35,9 +35,7 @@ fun NewRecipeCard(
         elevation = 0.dp,
         modifier = Modifier
             .size(210.dp, 300.dp)
-            .clickable {
-                onClick()
-            }
+            .clickable { onClick() }
     ) {
         Box {
             Image(
