@@ -27,7 +27,7 @@ class RecipesByCategorySource @Inject constructor(
             return LoadResult.Error(e)
         }
     }
-    
+
     override fun getRefreshKey(state: PagingState<Int, RecipeResponse>): Int? {
         return state.anchorPosition
     }

@@ -1,6 +1,5 @@
 package com.ajailani.resepy.ui.viewmodel
 
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -32,7 +31,7 @@ class RecipesListViewModel @Inject constructor(
     }
 
     fun handleEvent(recipesListEvent: RecipesListEvent) {
-        when(recipesListEvent) {
+        when (recipesListEvent) {
             is RecipesListEvent.GetSearchedRecipes -> getSearchedRecipes()
         }
     }

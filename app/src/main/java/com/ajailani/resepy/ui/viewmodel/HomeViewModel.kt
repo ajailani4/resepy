@@ -6,14 +6,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ajailani.resepy.data.model.response.RecipeResponse
 import com.ajailani.resepy.data.repository.MainRepository
 import com.ajailani.resepy.ui.event.HomeEvent
 import com.ajailani.resepy.ui.state.CategoriesState
 import com.ajailani.resepy.ui.state.NewRecipesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel

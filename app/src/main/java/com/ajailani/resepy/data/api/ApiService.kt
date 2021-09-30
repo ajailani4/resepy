@@ -1,8 +1,8 @@
 package com.ajailani.resepy.data.api
 
-import com.ajailani.resepy.data.model.response.BaseResponse
 import com.ajailani.resepy.data.model.Category
 import com.ajailani.resepy.data.model.Recipe
+import com.ajailani.resepy.data.model.response.BaseResponse
 import com.ajailani.resepy.data.model.response.RecipeResponse
 import retrofit2.Response
 import retrofit2.http.GET

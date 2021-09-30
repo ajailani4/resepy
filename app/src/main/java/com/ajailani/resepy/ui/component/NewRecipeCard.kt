@@ -17,10 +17,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.ajailani.resepy.data.model.response.RecipeResponse
-import com.ajailani.resepy.ui.screen.Screen
 import com.ajailani.resepy.ui.theme.BlackGray
 import com.ajailani.resepy.ui.theme.poppinsFontFamily
 import com.ajailani.resepy.util.generateRecipeResponse
@@ -120,9 +118,10 @@ fun ShortInfoSurface(
 @Preview(showBackground = true)
 @Composable
 fun PreviewNewRecipeCard() {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .padding(20.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp)
     ) {
         NewRecipeCard(
             recipe = generateRecipeResponse(),

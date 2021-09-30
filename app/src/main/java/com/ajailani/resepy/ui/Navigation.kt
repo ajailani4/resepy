@@ -6,8 +6,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.ajailani.resepy.ui.screen.RecipeDetailScreen
 import com.ajailani.resepy.ui.screen.HomeScreen
+import com.ajailani.resepy.ui.screen.RecipeDetailScreen
 import com.ajailani.resepy.ui.screen.RecipesListScreen
 import com.ajailani.resepy.ui.screen.Screen
 

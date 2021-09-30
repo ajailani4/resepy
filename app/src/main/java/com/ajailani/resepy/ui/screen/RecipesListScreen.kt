@@ -92,10 +92,11 @@ fun ContentSection(
     searchQuery: String?,
     searchedRecipes: SearchedRecipesState,
 ) {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(color = NewRecipesScreenBg)
-        .padding(horizontal = 20.dp)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = NewRecipesScreenBg)
+            .padding(horizontal = 20.dp)
     ) {
         if (searchQuery == null) {
             LazyColumn(contentPadding = PaddingValues(vertical = 20.dp)) {

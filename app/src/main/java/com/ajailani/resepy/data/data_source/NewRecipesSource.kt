@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.ajailani.resepy.data.api.ApiService
 import com.ajailani.resepy.data.model.response.RecipeResponse
-import com.ajailani.resepy.data.repository.MainRepository
 import javax.inject.Inject
 
 class NewRecipesSource @Inject constructor(

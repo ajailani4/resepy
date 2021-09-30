@@ -55,9 +55,10 @@ fun IngredientItem(ingredient: String) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewIngredientItem() {
-    Box(modifier = Modifier
-        .fillMaxWidth()
-        .padding(vertical = 15.dp, horizontal = 20.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 15.dp, horizontal = 20.dp)
     ) {
         StepItem(generateRecipe().ingredients[2])
     }

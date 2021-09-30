@@ -10,7 +10,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -22,18 +22,17 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import com.ajailani.resepy.ui.component.CategoryCard
 import com.ajailani.resepy.ui.component.NewRecipeCard
 import com.ajailani.resepy.ui.component.TitleSection
-import com.ajailani.resepy.ui.theme.poppinsFontFamily
 import com.ajailani.resepy.ui.state.CategoriesState
-import com.ajailani.resepy.ui.theme.SearchBackground
+import com.ajailani.resepy.ui.state.NewRecipesState
 import com.ajailani.resepy.ui.theme.DarkGray
 import com.ajailani.resepy.ui.theme.Primary
-import com.ajailani.resepy.ui.state.NewRecipesState
+import com.ajailani.resepy.ui.theme.SearchBackground
+import com.ajailani.resepy.ui.theme.poppinsFontFamily
 import com.ajailani.resepy.ui.viewmodel.HomeViewModel
 import compose.icons.EvaIcons
 import compose.icons.evaicons.Fill
@@ -49,9 +48,10 @@ fun HomeScreen(
     val newRecipesState = homeViewModel.newRecipesState
     val categoriesState = homeViewModel.categoriesState
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .verticalScroll(rememberScrollState())
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
         HomeHeader()
         SearchTextField(
@@ -72,8 +72,9 @@ fun HomeScreen(
 
 @Composable
 fun HomeHeader() {
-    Column(modifier = Modifier
-        .padding(20.dp)
+    Column(
+        modifier = Modifier
+            .padding(20.dp)
     ) {
         Text(
             text = "Halo",
@@ -213,9 +214,10 @@ fun CategorySection(
     navController: NavController,
     categoriesState: CategoriesState
 ) {
-    Column(modifier = Modifier
-        .padding(horizontal = 20.dp)
-        .padding(bottom = 20.dp)
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 20.dp)
+            .padding(bottom = 20.dp)
     ) {
         TitleSection(title = "Kategori")
 

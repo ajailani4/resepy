@@ -63,9 +63,10 @@ fun CategoryCard(
 @Preview(showBackground = true)
 @Composable
 fun PreviewCategoryCard() {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .padding(20.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp)
     ) {
         CategoryCard(
             category = generateCategory(),

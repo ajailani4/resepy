@@ -8,23 +8,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ajailani.resepy.ui.theme.Primary
 import com.ajailani.resepy.ui.theme.Secondary
 import com.ajailani.resepy.ui.theme.poppinsFontFamily
 import com.ajailani.resepy.util.generateRecipe
 
 @Composable
 fun StepItem(step: String) {
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .padding(bottom = 15.dp)
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 15.dp)
     ) {
         val number = step.split(" ")[0]
         val item = step.substringAfter(number).substring(1)
@@ -60,9 +57,10 @@ fun StepItem(step: String) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewStepItem() {
-    Box(modifier = Modifier
-        .fillMaxWidth()
-        .padding(vertical = 15.dp, horizontal = 20.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 15.dp, horizontal = 20.dp)
     ) {
         StepItem(generateRecipe().steps[0])
     }
