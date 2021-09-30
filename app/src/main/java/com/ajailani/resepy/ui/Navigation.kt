@@ -32,12 +32,16 @@ fun Navigation(
         }
 
         composable(
-            route = Screen.RecipesListScreen.route + "?title={title}&key={key}",
+            route = Screen.RecipesListScreen.route + "?title={title}&key={key}&searchQuery={searchQuery}",
             arguments = listOf(
                 navArgument("title") {
                     type = NavType.StringType
                 },
                 navArgument("key") {
+                    type = NavType.StringType
+                    nullable = true
+                },
+                navArgument("searchQuery") {
                     type = NavType.StringType
                     nullable = true
                 }

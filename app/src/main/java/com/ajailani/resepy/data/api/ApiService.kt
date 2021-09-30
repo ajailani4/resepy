@@ -33,4 +33,9 @@ interface ApiService {
         @Path("key") key: String,
         @Path("page") page: Int
     ): Response<BaseResponse<List<RecipeResponse>>>
+
+    @GET("search")
+    suspend fun getSearchedRecipes(
+        @Query("q") searchQuery: String
+    ): Response<BaseResponse<List<RecipeResponse>>>
 }

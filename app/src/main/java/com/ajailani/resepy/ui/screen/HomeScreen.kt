@@ -6,14 +6,19 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,6 +44,8 @@ fun HomeScreen(
     navController: NavController,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
+    val searchText = homeViewModel.searchText
+    val onSearchTextChanged = homeViewModel::onSearchTextChanged
     val newRecipesState = homeViewModel.newRecipesState
     val categoriesState = homeViewModel.categoriesState
 
@@ -47,7 +54,11 @@ fun HomeScreen(
         .verticalScroll(rememberScrollState())
     ) {
         HomeHeader()
-        SearchTextField()
+        SearchTextField(
+            navController = navController,
+            searchText = searchText,
+            onSearchTextChanged = onSearchTextChanged
+        )
         NewRecipesSection(
             navController = navController,
             newRecipesState = newRecipesState
@@ -82,9 +93,14 @@ fun HomeHeader() {
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun SearchTextField() {
-    var text by remember { mutableStateOf("") }
+fun SearchTextField(
+    navController: NavController,
+    searchText: String,
+    onSearchTextChanged: (String) -> Unit
+) {
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Box(
         modifier = Modifier
@@ -93,10 +109,8 @@ fun SearchTextField() {
         contentAlignment = Alignment.CenterStart
     ) {
         TextField(
-            value = text,
-            onValueChange = {
-                text = it
-            },
+            value = searchText,
+            onValueChange = onSearchTextChanged,
             shape = RoundedCornerShape(8.dp),
             leadingIcon = {
                 Icon(
@@ -106,6 +120,13 @@ fun SearchTextField() {
                 )
             },
             singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
+            keyboardActions = KeyboardActions(onSearch = {
+                navController.navigate(
+                    Screen.RecipesListScreen.route + "?title=$searchText&searchQuery=$searchText"
+                )
+                keyboardController?.hide()
+            }),
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = SearchBackground,
                 focusedIndicatorColor = Color.Transparent,

@@ -13,6 +13,7 @@ class MainRepository @Inject constructor(
     suspend fun getNewRecipes(limit: Int) = apiService.getNewRecipes(limit)
     suspend fun getRecipeDetail(key: String) = apiService.getRecipeDetail(key)
     suspend fun getCategories() = apiService.getCategories()
+    suspend fun getSearchedRecipes(searchQuery: String) = apiService.getSearchedRecipes(searchQuery)
 
     fun getPaginatedNewRecipes() =
         Pager(

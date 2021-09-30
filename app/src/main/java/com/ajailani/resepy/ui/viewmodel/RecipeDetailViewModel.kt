@@ -31,10 +31,10 @@ class RecipeDetailViewModel @Inject constructor(
     }
 
     private fun getDetail() {
-        savedStateHandle.get<String>("key").let { key ->
+        savedStateHandle.get<String>("key")!!.let { key ->
             viewModelScope.launch {
                 recipe = try {
-                    RecipeState.Success(mainRepository.getRecipeDetail(key!!).body()?.results)
+                    RecipeState.Success(mainRepository.getRecipeDetail(key).body()?.results)
                 } catch (e: Exception) {
                     RecipeState.Error(e.localizedMessage)
                 }

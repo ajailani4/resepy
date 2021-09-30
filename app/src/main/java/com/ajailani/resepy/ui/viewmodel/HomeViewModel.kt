@@ -22,6 +22,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
     var newRecipesState by mutableStateOf<NewRecipesState>(NewRecipesState.Loading)
     var categoriesState by mutableStateOf<CategoriesState>(CategoriesState.Loading)
+    var searchText by mutableStateOf("")
 
     init {
         handleEvent(HomeEvent.GetNewRecipes)
@@ -37,6 +38,10 @@ class HomeViewModel @Inject constructor(
         } catch (e: Exception) {
             Log.e("HomeEvent", e.message!!)
         }
+    }
+
+    fun onSearchTextChanged(text: String) {
+        searchText = text
     }
 
     private fun getNewRecipes() {
