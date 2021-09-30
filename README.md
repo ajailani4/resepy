@@ -14,7 +14,7 @@ This app uses :
 * Coil
 
 Rest API by https://github.com/tomorisakura/unofficial-masakapahariini-api <br>
-UI Design is sliced from https://dribbble.com/shots/15295362-Food-Recipe-App
+UI Design is sliced from https://dribbble.com/shots/15295362-Food-Recipe-App with little improvements
 
 ## Features
 1. Read new recipes
