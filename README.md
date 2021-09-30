@@ -7,10 +7,13 @@ This app uses :
 * Unidirectional Data Flow Pattern
 * Dagger Hilt
 * Paging 3
-* Retrofit
-* Moshi
 * Flow
 * Coroutines
+* Retrofit
+* Moshi
+* Coil
+
+Rest API by https://github.com/tomorisakura/unofficial-masakapahariini-api
 
 ## Features
 1. Read new recipes
