@@ -46,7 +46,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             newRecipesState = try {
                 NewRecipesState.Success(
-                    mainRepository.getNewRecipes(5).body()?.results
+                    mainRepository.getNewRecipes(5)?.results
                 )
             } catch (e: Exception) {
                 NewRecipesState.Error(e.localizedMessage)
@@ -57,7 +57,7 @@ class HomeViewModel @Inject constructor(
     private fun getCategories() {
         viewModelScope.launch {
             categoriesState = try {
-                CategoriesState.Success(mainRepository.getCategories().body()?.results)
+                CategoriesState.Success(mainRepository.getCategories()?.results)
             } catch (e: Exception) {
                 CategoriesState.Error(e.localizedMessage)
             }

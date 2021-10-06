@@ -34,7 +34,7 @@ class RecipeDetailViewModel @Inject constructor(
         savedStateHandle.get<String>("key")!!.let { key ->
             viewModelScope.launch {
                 recipe = try {
-                    RecipeState.Success(mainRepository.getRecipeDetail(key).body()?.results)
+                    RecipeState.Success(mainRepository.getRecipeDetail(key)?.results)
                 } catch (e: Exception) {
                     RecipeState.Error(e.localizedMessage)
                 }

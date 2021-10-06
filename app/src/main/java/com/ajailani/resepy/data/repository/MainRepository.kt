@@ -10,10 +10,10 @@ import javax.inject.Inject
 class MainRepository @Inject constructor(
     private val apiService: ApiService
 ) {
-    suspend fun getNewRecipes(limit: Int) = apiService.getNewRecipes(limit)
-    suspend fun getRecipeDetail(key: String) = apiService.getRecipeDetail(key)
-    suspend fun getCategories() = apiService.getCategories()
-    suspend fun getSearchedRecipes(searchQuery: String) = apiService.getSearchedRecipes(searchQuery)
+    suspend fun getNewRecipes(limit: Int) = apiService.getNewRecipes(limit).body()
+    suspend fun getRecipeDetail(key: String) = apiService.getRecipeDetail(key).body()
+    suspend fun getCategories() = apiService.getCategories().body()
+    suspend fun getSearchedRecipes(searchQuery: String) = apiService.getSearchedRecipes(searchQuery).body()
 
     fun getPaginatedNewRecipes() =
         Pager(

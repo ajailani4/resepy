@@ -44,7 +44,7 @@ class RecipesListViewModel @Inject constructor(
         viewModelScope.launch {
             searchedRecipes = try {
                 SearchedRecipesState.Success(
-                    mainRepository.getSearchedRecipes(searchQuery!!).body()?.results
+                    mainRepository.getSearchedRecipes(searchQuery!!)?.results
                 )
             } catch (e: Exception) {
                 SearchedRecipesState.Error(e.localizedMessage)

@@ -54,6 +54,7 @@ fun generateRecipes() =
         generateRecipeResponse(),
         generateRecipeResponse(),
         generateRecipeResponse(),
+        generateRecipeResponse(),
         generateRecipeResponse()
     )
 
@@ -65,6 +66,7 @@ fun generateCategory() =
 
 fun generateCategories() =
     listOf(
+        generateCategory(),
         generateCategory(),
         generateCategory(),
         generateCategory(),
