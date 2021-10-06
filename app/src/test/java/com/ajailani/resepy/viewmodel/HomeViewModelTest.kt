@@ -12,7 +12,6 @@ import com.ajailani.resepy.ui.viewmodel.HomeViewModel
 import com.ajailani.resepy.util.generateCategories
 import com.ajailani.resepy.util.generateRecipes
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
@@ -21,9 +20,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 import org.junit.Assert.*
-import org.junit.experimental.categories.Categories
-import retrofit2.Response
-import java.lang.RuntimeException
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
@@ -38,11 +34,6 @@ class HomeViewModelTest {
 
     @Mock
     private lateinit var mainRepository: MainRepository
-
-    @Before
-    fun setUp() {
-
-    }
 
     @Test
     fun getNewRecipes_ShouldReturnSuccess() {
@@ -64,7 +55,7 @@ class HomeViewModelTest {
             val newRecipesState = homeViewModel.newRecipesState
             var newRecipes = listOf<RecipeResponse>()
 
-            when(newRecipesState) {
+            when (newRecipesState) {
                 is NewRecipesState.Loading -> { }
 
                 is NewRecipesState.Success -> {
