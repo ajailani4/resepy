@@ -1,4 +1,4 @@
-# Spesipon
+# Resepy
 Simple app to search for food recipes.
 
 ## Notes
