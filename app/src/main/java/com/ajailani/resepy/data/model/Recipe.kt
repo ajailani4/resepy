@@ -10,7 +10,7 @@ data class Recipe(
     @field:Json(name = "dificulty")
     val difficulty: String = "",
     val author: Author = Author(),
-    val desc: String= "",
+    val desc: String = "",
     @field:Json(name = "ingredient")
     val ingredients: List<String> = listOf(),
     @field:Json(name = "step")

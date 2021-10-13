@@ -10,14 +10,15 @@ import com.ajailani.resepy.ui.viewmodel.RecipeDetailViewModel
 import com.ajailani.resepy.util.generateRecipe
 import com.ajailani.resepy.utils.TestCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.Assert.assertNotNull
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
-import org.junit.Assert.*
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
@@ -55,11 +56,13 @@ class RecipeDetailViewModelTest {
             var recipe = Recipe()
 
             when (recipeState) {
-                is RecipeState.Loading -> { }
+                is RecipeState.Loading -> {
+                }
                 is RecipeState.Success -> {
                     recipe = recipeState.recipe!!
                 }
-                is RecipeState.Error -> { }
+                is RecipeState.Error -> {
+                }
             }
 
             // Assert

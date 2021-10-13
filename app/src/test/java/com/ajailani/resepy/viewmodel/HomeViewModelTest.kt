@@ -4,22 +4,24 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.ajailani.resepy.data.model.Category
 import com.ajailani.resepy.data.model.response.BaseResponse
 import com.ajailani.resepy.data.model.response.RecipeResponse
-import com.ajailani.resepy.utils.TestCoroutineRule
 import com.ajailani.resepy.data.repository.MainRepository
 import com.ajailani.resepy.ui.state.CategoriesState
 import com.ajailani.resepy.ui.state.NewRecipesState
 import com.ajailani.resepy.ui.viewmodel.HomeViewModel
 import com.ajailani.resepy.util.generateCategories
 import com.ajailani.resepy.util.generateRecipes
+import com.ajailani.resepy.utils.TestCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
-import org.junit.Assert.*
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
@@ -56,13 +58,15 @@ class HomeViewModelTest {
             var newRecipes = listOf<RecipeResponse>()
 
             when (newRecipesState) {
-                is NewRecipesState.Loading -> { }
+                is NewRecipesState.Loading -> {
+                }
 
                 is NewRecipesState.Success -> {
                     newRecipes = newRecipesState.recipes!!
                 }
 
-                is NewRecipesState.Error -> { }
+                is NewRecipesState.Error -> {
+                }
             }
 
             // Assert
@@ -95,11 +99,13 @@ class HomeViewModelTest {
             var categories = listOf<Category>()
 
             when (categoriesState) {
-                is CategoriesState.Loading -> { }
+                is CategoriesState.Loading -> {
+                }
                 is CategoriesState.Success -> {
                     categories = categoriesState.categories!!
                 }
-                is CategoriesState.Error -> { }
+                is CategoriesState.Error -> {
+                }
             }
 
             // Assert

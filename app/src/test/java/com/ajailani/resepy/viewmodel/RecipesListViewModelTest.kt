@@ -136,13 +136,15 @@ class RecipesListViewModelTest {
             var searchedRecipes = listOf<RecipeResponse>()
 
             when (searchedRecipesState) {
-                is SearchedRecipesState.Loading -> { }
+                is SearchedRecipesState.Loading -> {
+                }
 
                 is SearchedRecipesState.Success -> {
                     searchedRecipes = searchedRecipesState.searchedRecipes!!
                 }
 
-                is SearchedRecipesState.Error -> { }
+                is SearchedRecipesState.Error -> {
+                }
             }
 
             // Assert
