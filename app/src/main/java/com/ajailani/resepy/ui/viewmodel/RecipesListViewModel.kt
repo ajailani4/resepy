@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipesListViewModel @Inject constructor(
     private val mainRepository: MainRepository,
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     var title by mutableStateOf("")
     var key by mutableStateOf<String?>(null)
