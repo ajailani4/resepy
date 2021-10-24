@@ -28,6 +28,7 @@ fun TitleSection(
     ) {
         Text(
             text = title,
+            color = Color.Black,
             fontFamily = poppinsFontFamily,
             fontSize = 18.sp,
             fontWeight = FontWeight.SemiBold,
